@@ -36,7 +36,7 @@ Il s'agit d'un projet de développement de site web basé sur un cahier des char
 J'ai été seul sur le projet, ça fait du bien de pouvoir faire les choses à son rythme et de ne pas avoir à faire de compromis sur les idées que j'avais en tête.
 Même si le site reste assez sobre il est tout de même fonctionnel et rempli le cahier des charges.
 
-C'était chaud sur la fin parceque d'un coup sans aucunes raisons, alors que jusqu'ici tout fonctionnait bien, mon navigateur s'est mis à ne plus afficher les changements et j'ai mis plusieurs heures à m'en rendre compte donc j'ai perdu un temps précieux, je suis satisfait de mon travail mais j'ai manqué des quelques heures que j'ai perdu.
+C'était compliqué sur la fin parceque d'un coup sans aucunes raisons, alors que jusqu'ici tout fonctionnait bien, mon navigateur s'est mis à ne plus afficher les changements et j'ai mis plusieurs heures à m'en rendre compte donc j'ai perdu un temps précieux, je suis satisfait de mon travail mais j'ai manqué des quelques heures que j'ai perdu.
 
 Les contributions **ne sont pas autorisées** sauf accord explicite.  
 Merci de créer une *issue* pour signaler un bug ou une suggestion.
@@ -50,5 +50,6 @@ Ce projet est protégé par le droit d’auteur (**All rights reserved**).
 Vous n’êtes pas autorisé à utiliser, copier, modifier ou redistribuer ce code sans mon accord explicite.
 
 Bien que les images présentes sur le site ne sont pas soumises au droit d'auteur, elles ne sont pas publiées dans le dépôt.
+
 
 
