@@ -1,0 +1,409 @@
+/* global */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Fond sombre + carrousel d'images en background */
+body {
+    position: relative;
+    color: #f5f5f7;
+    overflow-x: hidden;
+    background-color: rgba(0,0,0,0.25); /* plus transparent */
+}
+
+/* Carrousel d'images de fond */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 110%; /* zoom */
+    background-position: center center;
+    opacity: 0.92;
+    z-index: -2;
+    animation: bg-slider 48s infinite linear;
+    transform: scale(1.05); /* zoom */
+}
+
+
+/* Overlay léger */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.15); /* overlay faible */
+    z-index: -1;
+}
+
+
+/* Wrapper principal */
+.page-wrapper {
+    min-height: 100vh;
+    padding: 20px 32px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* header et auth */
+
+.top-bar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.logo-title h1 {
+    margin: 0;
+    font-size: 28px;
+    letter-spacing: 0.04em;
+}
+
+.subtitle {
+    margin: 6px 0 0;
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.auth-box {
+    background: rgba(10, 10, 15, 0.85);
+    border-radius: 16px;
+    padding: 16px 18px;
+    min-width: 270px;
+    max-width: 320px;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.55);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.badge-admin {
+    margin-left: 8px;
+    padding: 2px 6px;
+    font-size: 11px;
+    border-radius: 999px;
+    background: linear-gradient(120deg, #ff9f43, #ff6b6b);
+    color: #000;
+}
+
+.btn-logout {
+    align-self: flex-end;
+    font-size: 12px;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #f5f5f7;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-logout:hover {
+    background: #f5f5f7;
+    color: #111;
+}
+
+/* blocs login/register */
+.tabs {
+    position: relative;
+    font-size: 14px;
+}
+
+.tabs input[type="radio"] {
+    display: none;
+}
+
+.tabs label {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-right: 6px;
+    font-size: 13px;
+    border-radius: 999px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+#tab-login:checked + label {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.35);
+}
+
+#tab-login:checked + label + input + label {
+    background: rgba(255,255,255,0.04);
+    border-color: transparent;
+}
+
+#tab-register:checked + label {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.35);
+}
+
+.tab-content {
+    margin-top: 12px;
+    position: relative;
+}
+
+.auth-form {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#tab-login:checked ~ .tab-content form:nth-of-type(1) {
+    display: flex;
+}
+
+#tab-register:checked ~ .tab-content form:nth-of-type(2) {
+    display: flex;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="password"] {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.04);
+    color: #f5f5f7;
+    font-size: 13px;
+}
+
+.auth-form input::placeholder {
+    color: rgba(245,245,247,0.6);
+}
+
+.auth-form button {
+    margin-top: 6px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(120deg, #6c5ce7, #00cec9);
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.2s ease;
+}
+
+.auth-form button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+    opacity: 0.95;
+}
+
+/* msg flash */
+
+.flash-message {
+    margin: 18px 0 0;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.65);
+    border: 1px solid rgba(255,255,255,0.18);
+    font-size: 13px;
+    max-width: 420px;
+}
+
+/* contenu principal */
+
+.main-content {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* section citations */
+
+.quotes-section {
+    max-width: 720px;
+    margin: 0 auto;
+    background: rgba(5, 5, 10, 0.82);
+    border-radius: 20px;
+    padding: 24px 26px 26px;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.6);
+}
+
+.quotes-section h2 {
+    margin-top: 0;
+    font-size: 18px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+/* carourou de citations */
+
+.quote-carousel {
+    position: relative;
+    min-height: 110px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+/* citations slides */
+.quote-slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    opacity: 0;
+    animation: quote-slider 48s infinite ease-in-out;
+}
+
+.quote-text {
+    font-size: 18px;
+    line-height: 1.4;
+    margin: 0 0 6px;
+}
+
+.quote-meta {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.quote-meta .date {
+    opacity: 0.65;
+}
+
+/* 6 citations 8 sec chacune */
+.quote-slide.slide-1 { animation-delay: 0s; }
+.quote-slide.slide-2 { animation-delay: 8s; }
+.quote-slide.slide-3 { animation-delay: 16s; }
+.quote-slide.slide-4 { animation-delay: 24s; }
+.quote-slide.slide-5 { animation-delay: 32s; }
+.quote-slide.slide-6 { animation-delay: 40s; }
+
+/* form citation */
+
+.quote-form {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.quote-form textarea {
+    width: 100%;
+    resize: vertical;
+    min-height: 70px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.03);
+    color: #f5f5f7;
+    font-size: 14px;
+    padding: 10px 12px;
+}
+
+.quote-form textarea::placeholder {
+    color: rgba(245,245,247,0.6);
+}
+
+.quote-form button {
+    align-self: flex-end;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(120deg, #00b894, #0984e3);
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    transition: box-shadow 0.1s ease, transform 0.1s ease, opacity 0.15s ease;
+}
+
+.quote-form button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.45);
+    opacity: 0.96;
+}
+
+/* section admin */
+
+.admin-section {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(5, 5, 10, 0.9);
+    border-radius: 22px;
+    padding: 20px 24px 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 22px 50px rgba(0,0,0,0.7);
+}
+
+/* adnimations ne pas toucher svp j'ai trop galéré */
+
+/* Carrousel de fond */
+@keyframes bg-slider {
+    0%   { background-image: url("images/finlande-chemin.jpg"); }
+    16.66%  { background-image: url("images/fleurs.jpg"); }
+    33.33%  { background-image: url("images/lac-montagne.jpg"); }
+    50%  { background-image: url("images/neige.jpg"); }
+    66.66%  { background-image: url("images/plage.jpg"); }
+    83.33%  { background-image: url("images/river.jpg"); }
+    100% { background-image: url("images/finlande-chemin.jpg"); }
+}
+
+/* anti-chevauchement */
+@keyframes quote-slider {
+    0%   { opacity: 0; transform: translateY(8px); }
+    5%   { opacity: 1; transform: translateY(0); }
+    15%  { opacity: 1; transform: translateY(0); }
+    20%  { opacity: 0; transform: translateY(-8px); }
+    100% { opacity: 0; transform: translateY(-8px); }
+}
+
+/* adaptation responsive de la page et oui on est des pros */
+
+@media (max-width: 900px) {
+    .page-wrapper {
+        padding: 16px 16px 30px;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .auth-box {
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    .quotes-section,
+    .admin-section {
+        padding: 18px 16px 20px;
+    }
+
+    .quote-text {
+        font-size: 16px;
+    }
+
+    .logo-title h1 {
+        font-size: 22px;
+    }
+}
+
+/* style auteur */
+
+.quote-meta .auteur {
+    display: block;
+    font-style: italic;
+    color: rgba(255,255,255,0.8);
+    margin-top: 4px;
+    margin-bottom: 2px;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+}
